@@ -11,8 +11,8 @@ Steps for configuring and running the application
       - Set the server database name in 'ConnectionStrings' from 'WeatherMonitor.API' project in'appsettings.Development.json'
       - Run from cmd the following command 'dotnet run /seed' from 'WeatherMonitor.API' to populate the database 
       - Run API:
-            - From VS IIS Server -> Server host: https://localhost:44380/
-            - From cmd 'dotnet run' in 'WeatherMonitor.API' -> Server host: https://localhost:5001/
+        - From VS IIS Server -> Server host: https://localhost:44380/
+        - From cmd 'dotnet run' in 'WeatherMonitor.API' -> Server host: https://localhost:5001/
   
   2. Client
       - In 'WeatherMonitor.Client' project run with cmd the follwowing command 'npm install'
