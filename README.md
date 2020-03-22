@@ -3,7 +3,7 @@
 Prerequisite
   1. .NET Core 3.0 (or higher) SDK
   2. Node js 12.16.1 and Angular CLI 9.0.6
-  3. SQL Server
+  3. Microsoft SQL Server and Microsoft SQL Server Management Studio
 
 Steps for configuring and running the application
 
