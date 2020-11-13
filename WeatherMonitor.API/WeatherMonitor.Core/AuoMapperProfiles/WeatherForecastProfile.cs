@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using WeatherMonitor.Core.DtoModels;
 using WeatherMonitor.Core.Entities;
+using WeatherMonitor.Core.Models;
 
 namespace WeatherMonitor.Core.AuoMapperProfiles
 {
@@ -8,8 +9,9 @@ namespace WeatherMonitor.Core.AuoMapperProfiles
     {
         public WeatherForecastProfile()
         {
-            CreateMap<WeatherForecast, WeatherForecastDto>()
-                .ForMember(x => x.TemperatureF, y => y.MapFrom(z => 32 + (int)(z.TemperatureC / 0.5556)));
+            CreateMap<WeatherForecastDto, WeatherForecast>()
+                .ForMember(x => x.CityId, y=> y.Ignore())
+                .ForMember(x => x.City, y => y.Ignore());
         }
     }
 }

@@ -1,11 +1,12 @@
-<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height:100vh">
+<div fxFlex fxLayout="column" fxLayoutGap="10px"  style="height:100vh">
+  <h1 style="padding-left: 1.1em;" *ngIf="weatherForecastList.length > 0">Weather for the next 8 days in {{weatherForecastList[0].cityName}}</h1>
   <div class="row-filter">
     <mat-slide-toggle *ngIf="weatherForecastList.length > 0" (change)="toggleDegreesFormat()">°C/°F</mat-slide-toggle>
     <mat-slide-toggle  style="padding-left: 1em" *ngIf="weatherForecastList.length > 0"
-                      (change)="toggleDayCycle($event.checked)">Day/Night
+                      (change)="changeDayCycle()">Day/Night
     </mat-slide-toggle>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="space-around start">
+  <div style="padding-left: 1.5rem;" fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="32px"> 
     <div *ngFor="let weatherForecastItem of weatherForecastList" class="test">
       <mat-card class="example-card">
         <mat-card-header>
@@ -14,38 +15,40 @@
           <mat-card-subtitle>Precipitation: {{weatherForecastItem.precipitation}} %</mat-card-subtitle>
           <mat-card-subtitle>Wind: {{weatherForecastItem.wind}} km/h</mat-card-subtitle>
         </mat-card-header>
-        <img *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Sunny" mat-card-image
+        <img *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Sun || weatherForecastItem.weatherStatus == WeatherStatus.Clear && !toggleDayCycle" mat-card-image
              src="../../../../assets/images/sunny.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Wind && weatherForecastItem.dayCycle == DayCycle.Day"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Wind && !toggleDayCycle"
           mat-card-image src="../../../../assets/images/day_windy.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Snow && weatherForecastItem.dayCycle == DayCycle.Day"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Snow && !toggleDayCycle"
           mat-card-image src="../../../../assets/images/day_snow.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Rainy && weatherForecastItem.dayCycle == DayCycle.Day"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Rain && !toggleDayCycle"
           mat-card-image src="../../../../assets/images/day_rainy.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Cloudy && weatherForecastItem.dayCycle == DayCycle.Day"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Clouds && !toggleDayCycle"
           mat-card-image src="../../../../assets/images/day_cloudy.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Clear && weatherForecastItem.dayCycle == DayCycle.Night"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Clear && toggleDayCycle"
           mat-card-image src="../../../../assets/images/night_clear.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Wind && weatherForecastItem.dayCycle == DayCycle.Night"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Wind && toggleDayCycle"
           mat-card-image src="../../../../assets/images/night_windy.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Snow && weatherForecastItem.dayCycle == DayCycle.Night"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Snow && toggleDayCycle"
           mat-card-image src="../../../../assets/images/night_snow.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Rainy && weatherForecastItem.dayCycle == DayCycle.Night"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Rain && toggleDayCycle"
           mat-card-image src="../../../../assets/images/night_rainy.png" width="256" height="256" alt="No photo">
         <img
-          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Cloudy && weatherForecastItem.dayCycle == DayCycle.Night"
+          *ngIf="weatherForecastItem.weatherStatus == WeatherStatus.Clouds && toggleDayCycle"
           mat-card-image src="../../../../assets/images/night_cloudy.png" width="256" height="256" alt="No photo">
         <mat-card-content>
-          <mat-card-title *ngIf="!isToggled">Temperature: {{ weatherForecastItem.temperatureC}} °C</mat-card-title>
-          <mat-card-title *ngIf="isToggled">Temperature: {{weatherForecastItem.temperatureF}} °F</mat-card-title>
+          <mat-card-title *ngIf="!isToggled && !toggleDayCycle">Temperature: {{ weatherForecastItem.temperatureCDay}} °C</mat-card-title>
+          <mat-card-title *ngIf="!isToggled && toggleDayCycle">Temperature: {{weatherForecastItem.temperatureCNight}} °C</mat-card-title>
+          <mat-card-title *ngIf="isToggled && !toggleDayCycle">Temperature: {{ weatherForecastItem.temperatureFDay}} °F</mat-card-title>
+          <mat-card-title *ngIf="isToggled && toggleDayCycle">Temperature: {{weatherForecastItem.temperatureFNight}} °F</mat-card-title>
           <p>{{weatherForecastItem.summary}} </p>
         </mat-card-content>
       </mat-card>

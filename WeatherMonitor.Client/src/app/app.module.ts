@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {LayoutModule} from './shared/modules/layout/layout.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SelectFieldsComponent } from './modules/weather-forecast/select-fields/select-fields.component';
 
 @NgModule({
   declarations: [

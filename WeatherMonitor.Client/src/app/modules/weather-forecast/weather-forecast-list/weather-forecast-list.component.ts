@@ -8,21 +8,22 @@ import {DayCycle, WeatherForecastModel, WeatherStatus} from '../../../models/wea
 })
 export class WeatherForecastListComponent implements OnInit {
 
-  @Output() OnToggleDayCycle = new EventEmitter<boolean>();
   @Input() weatherForecastList: WeatherForecastModel[];
 
   WeatherStatus = WeatherStatus;
-  DayCycle = DayCycle;
   isToggled = false;
+  toggleDayCycle = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
   toggleDegreesFormat() {
     this.isToggled =  !this.isToggled;
   }
-  toggleDayCycle(checked) {
-    this.OnToggleDayCycle.emit(checked);
+
+  changeDayCycle() {
+    this.toggleDayCycle = !this.toggleDayCycle;
   }
 }

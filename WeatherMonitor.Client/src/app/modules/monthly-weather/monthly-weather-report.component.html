@@ -1,0 +1,3 @@
+<app-select-fields [monthSelection]="true" (formValues)="onMonthSelect($event)"></app-select-fields>
+
+<app-monthly-weather-chart *ngIf="monthlyWeather !== null" [selectedMonth]="selectedMonth"  [monthlyWeather]="monthlyWeather"></app-monthly-weather-chart>

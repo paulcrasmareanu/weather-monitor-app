@@ -3,20 +3,28 @@
     <h3>Choose country and city to get weather forecast:</h3>
   </div>
   <div class="row">
-      <mat-form-field appearance="standard" style="padding-left: 1em">
-        <mat-select placeholder="Select a Country" [(value)]="selectedCountry"
-                    (selectionChange)="onSelectedCountry($event.value)">
+    <form [formGroup]="formFilter">
+      <mat-form-field appearance="standard" style="padding-left: 1em" >
+        <mat-select placeholder="Select a Country" [(value)]="selectedCountry " formControlName="country"
+                    (selectionChange)="onSelectedCountry()">
           <mat-option *ngFor="let country of countries$ | async"
                       value="{{country.id}}">{{country.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="standard" style="padding-left: 1em">
-        <mat-select (selectionChange)="onSelectedCity($event.value)" placeholder="Select a City" [disabled]="selectedCountry == null">
+      <mat-form-field appearance="standard" style="padding-left: 1em" >
+        <mat-select (selectionChange)="onChange()" placeholder="Select a City" [disabled]="disableCityDropdown()" formControlName="city">
           <mat-option *ngFor="let city of cities$ | async"
                       value="{{city.id}}">{{city.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field *ngIf="monthSelection" appearance="standard" style="padding-left: 1em" > 
+        <mat-select (selectionChange)="onChange()" placeholder="Select a Month" [disabled]="disableMonthDropdown()" formControlName="month" > 
+          <mat-option *ngFor="let month of months | enumToArray"
+                      value="{{month.index}}">{{month.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
   </div>
 </div>

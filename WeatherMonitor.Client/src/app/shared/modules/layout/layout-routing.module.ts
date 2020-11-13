@@ -19,6 +19,10 @@ const routes: Routes = [
         loadChildren: () => import('../../../modules/weather-forecast/weather-forecast.module').then(m => m.WeatherForecastModule)
       },
       {
+        path: 'monthly-weather',
+        loadChildren: () => import('../../../modules/monthly-weather/monthly-weather.module').then(m => m.MonthlyWeatherModule)
+      },
+      {
         path: '',
         redirectTo:  '/home',
         pathMatch: 'full'

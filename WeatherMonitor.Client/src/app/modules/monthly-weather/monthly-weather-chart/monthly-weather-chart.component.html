@@ -1,0 +1,13 @@
+<div style="display: block; width: 800px;">
+    <mat-slide-toggle style="padding-left: 1.5rem;" (change)="toggleDegreesFormat()">°C/°F</mat-slide-toggle>
+    <canvas mdbChart
+        [chartType]="chartType"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>

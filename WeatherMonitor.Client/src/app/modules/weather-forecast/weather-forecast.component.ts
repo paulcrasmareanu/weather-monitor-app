@@ -10,32 +10,36 @@ import {WeatherForecastService} from '../../services/weather-forecast.service';
 export class WeatherForecastComponent implements OnInit {
 
   weatherForecastList: WeatherForecastModel[] = [];
+  currentWeatherForecast: WeatherForecastModel = null;
   cityId: string;
-  dayCycle: DayCycle = DayCycle.Day;
 
   constructor(private weatherForecastService: WeatherForecastService) {}
 
   ngOnInit(): void {
   }
 
-  toggleDayCycle(checked) {
-    this.dayCycle = +checked;
-    this.getWeatherForecast();
-  }
-
-  onSelectedCity(event) {
-    this.cityId = event;
+ 
+  onSelectedCity(formValues) {
+    this.cityId = formValues['city'].value;
+    console.log(this.cityId)
     if (this.cityId !== null) {
+      this.getCurrentWeather();
       this.getWeatherForecast();
       return;
     }
-    this.dayCycle = DayCycle.Day;
     this.weatherForecastList = [];
+    this.currentWeatherForecast = null;
   }
 
   private getWeatherForecast() {
-    this.weatherForecastService.getWeatherForecast(this.cityId, this.dayCycle).subscribe(data => {
+    this.weatherForecastService.getWeatherForecast(this.cityId).subscribe(data => {
       this.weatherForecastList = data;
+    });
+  }
+
+  private getCurrentWeather() {
+    this.weatherForecastService.getCurrentWeatherForecast(this.cityId).subscribe(data => {
+      this.currentWeatherForecast = data;
     });
   }
 }

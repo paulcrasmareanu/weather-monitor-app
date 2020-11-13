@@ -1,4 +1,3 @@
-using System.Reflection;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WeatherMonitor.Core;
 using WeatherMonitor.Core.Abstracts;
+using WeatherMonitor.Core.Options;
+using WeatherMonitor.Core.Services;
 using WeatherMonitor.Infrastructure.Data;
 
 namespace WheatherMonitor.API
@@ -30,6 +31,11 @@ namespace WheatherMonitor.API
             services.AddMediatR(typeof(AssemblyMarker));
 
             services.AddScoped<IWeatherMonitorDbContext, WeatherMonitorDbContext>();
+            services.AddScoped<IOpenWeatherAPIService, OpenWeatherAPIService>();
+
+            services.Configure<OpenWeatherApiOptions>(Configuration.GetSection("OpenWeatherApi"));
+
+            services.AddSwaggerGen();
 
             services
                 .AddDbContext<WeatherMonitorDbContext>(options =>
@@ -63,6 +69,14 @@ namespace WheatherMonitor.API
             app.UseHttpsRedirection();
 
             app.UseCors("DefaultPolicy");
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => 
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = "api/weatherforecast/swagger";
+            });
 
             app.UseRouting();
 

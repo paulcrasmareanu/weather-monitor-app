@@ -28,6 +28,12 @@ namespace WeatherMonitor.Infrastructure.Data.Migrations
                     b.Property<Guid>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<double>("Lat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Lon")
+                        .HasColumnType("float");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -64,19 +70,25 @@ namespace WeatherMonitor.Infrastructure.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DayCycle")
-                        .HasColumnType("int");
-
                     b.Property<int>("Humidity")
                         .HasColumnType("int");
 
-                    b.Property<int>("Precipitation")
+                    b.Property<int>("MaxC")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinC")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Pressure")
                         .HasColumnType("int");
 
                     b.Property<string>("Summary")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TemperatureC")
+                    b.Property<int>("TemperatureCDay")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemperatureCNight")
                         .HasColumnType("int");
 
                     b.Property<int>("WeatherStatus")

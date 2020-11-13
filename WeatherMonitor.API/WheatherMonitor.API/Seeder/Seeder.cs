@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using WeatherMonitor.Core.Abstracts;
@@ -76,48 +75,66 @@ namespace WeatherMonitor.Api.Seeder
                 {
 
                 Name = "Timisoara",
+                Lat = 45.74,
+                Lon = 21.2,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "Romania")
                 },
                 new City()
                 {
                 Name = "Brasov",
+                Lat = 45.65,
+                Lon = 25.6,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "Romania")
                 },
                 new City()
                 {
                 Name = "Sibiu",
+                Lat = 45.79,
+                Lon = 24.14,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "Romania")
                 },
                 new City()
                 {
 
                 Name = "Hamburg",
+                Lat = 53.55,
+                Lon = 9.99,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "Germany")
                 },
                 new City()
                 {
                 Name = "Berlin",
+                Lat = 52.52,
+                Lon = 13.4,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "Germany")
                 },
                 new City()
                 {
                 Name = "Frankfurt",
+                Lat = 50.11,
+                Lon = 8.68,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "Germany")
                 },
                 new City()
                 {
 
                 Name = "London",
+                Lat = 51.5,
+                Lon = -0.12,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "UK")
                 },
                 new City()
                 {
                 Name = "Manchester",
+                Lat = 53.47,
+                Lon = -2.24,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "UK")
                 },
                 new City()
                 {
                 Name = "Oxford",
+                Lat = 51.75,
+                Lon = -1.25,
                 Country = context.Countries.FirstOrDefault(x =>x.Name == "UK")
                 }
 
@@ -128,139 +145,9 @@ namespace WeatherMonitor.Api.Seeder
                 if (!context.Cities.Any(x => x.Name == item.Name))
                 {
                     context.Cities.Add(item);
-                    AddWeatherForecasts(context, item);
-                    
                 }
             }
 
-        }
-
-        private void AddWeatherForecasts(WeatherMonitorDbContext context, City city)
-        {
-            var weatherForecastList = new List<WeatherForecast>
-            {
-                new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-4),
-                    City = city,
-                    TemperatureC = 22,
-                    Precipitation = 0,
-                    Humidity = 70,
-                    Wind = 5,
-                    Summary = "Sunny",
-                    WeatherStatus = WeatherStatus.Sunny,
-                    DayCycle =DayCycle.Day
-                },
-                 new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-3),
-                    City = city,
-                    TemperatureC = 15,
-                    Precipitation = 55,
-                    Humidity = 65,
-                    Wind = 25,
-                    Summary = "Rainy",
-                    WeatherStatus = WeatherStatus.Rainy,
-                    DayCycle =DayCycle.Day
-                },
-                  new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-2),
-                    City = city,
-                    TemperatureC = 25,
-                    Precipitation = 20,
-                    Humidity = 74,
-                    Wind = 15,
-                    Summary = "Cloudy",
-                    WeatherStatus = WeatherStatus.Cloudy,
-                    DayCycle =DayCycle.Day
-                },
-                 new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-1),
-                    City = city,
-                    TemperatureC = 25,
-                    Precipitation = 12,
-                    Humidity = 74,
-                    Wind = 85,
-                    Summary = "Windy",
-                    WeatherStatus = WeatherStatus.Wind,
-                    DayCycle =DayCycle.Day
-                },
-                new WeatherForecast
-                {
-                    Date = DateTime.Now,
-                    City = city,
-                    TemperatureC = 10,
-                    Precipitation = 10,
-                    Humidity = 71,
-                    Wind = 10,
-                    Summary = "Sunny",
-                    DayCycle = DayCycle.Day,
-                    WeatherStatus = WeatherStatus.Sunny,
-                },
-                 new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-4),
-                    City = city,
-                    TemperatureC = -5,
-                    Precipitation = 60,
-                    Humidity = 71,
-                    Wind = 10,
-                    Summary = "Snowing",
-                    DayCycle = DayCycle.Night,
-                    WeatherStatus = WeatherStatus.Snow,
-                },
-                new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-3),
-                    City = city,
-                    TemperatureC = 10,
-                    Precipitation = 10,
-                    Humidity = 71,
-                    Wind = 10,
-                    Summary = "Clear",
-                    DayCycle = DayCycle.Night,
-                    WeatherStatus = WeatherStatus.Clear,
-                },
-               new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-2),
-                    City = city,
-                    TemperatureC = 12,
-                    Precipitation = 0,
-                    Humidity = 71,
-                    Wind = 72,
-                    Summary = "Windy",
-                    DayCycle = DayCycle.Night,
-                    WeatherStatus = WeatherStatus.Wind,
-                },
-               new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(-1),
-                    City = city,
-                    TemperatureC = 13,
-                    Precipitation = 10,
-                    Humidity = 71,
-                    Wind = 10,
-                    Summary = "Cloudy",
-                    DayCycle = DayCycle.Night,
-                    WeatherStatus = WeatherStatus.Cloudy,
-                },
-                 new WeatherForecast
-                {
-                    Date = DateTime.Now,
-                    City = city,
-                    TemperatureC = 10,
-                    Precipitation = 10,
-                    Humidity = 71,
-                    Wind = 10,
-                    Summary = "Clear",
-                    DayCycle = DayCycle.Night,
-                    WeatherStatus = WeatherStatus.Clear,
-                },
-            };
-            context.WeatherForecasts.AddRange(weatherForecastList);
         }
     }
 }

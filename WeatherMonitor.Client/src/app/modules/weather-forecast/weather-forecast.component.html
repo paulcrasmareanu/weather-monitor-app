@@ -1,5 +1,6 @@
-<app-select-fields (selectedCity)="onSelectedCity($event)">
+<app-select-fields (formValues)="onSelectedCity($event)">
 </app-select-fields>
-<app-weather-forecast-list (OnToggleDayCycle)="toggleDayCycle($event)" [weatherForecastList]="weatherForecastList">
+<app-current-weather  [currentWeather]="currentWeatherForecast" ></app-current-weather>
+<app-weather-forecast-list  [weatherForecastList]="weatherForecastList">
 </app-weather-forecast-list>
 

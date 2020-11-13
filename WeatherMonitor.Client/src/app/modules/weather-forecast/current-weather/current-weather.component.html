@@ -1,0 +1,30 @@
+<div class="container" *ngIf="currentWeather !== null">
+  <h1>Today's Weather in {{currentWeather.cityName}}</h1>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{currentWeather.date | date:'fullDate'}}</mat-card-title>
+      <mat-card-subtitle>Humidity: {{currentWeather.humidity}} %</mat-card-subtitle>
+      <mat-card-subtitle>Precipitation: {{currentWeather.precipitation}} %</mat-card-subtitle>
+      <mat-card-subtitle>Wind: {{currentWeather.wind}} km/h</mat-card-subtitle>
+    </mat-card-header>
+    <img *ngIf="currentWeather.weatherStatus === WeatherStatus.Sun" mat-card-image
+      src="../../../../assets/images/sunny.png" width="256" height="256" alt="No photo">
+    <img *ngIf="currentWeather.weatherStatus === WeatherStatus.Wind" mat-card-image
+      src="../../../../assets/images/day_windy.png" width="256" height="256" alt="No photo">
+    <img *ngIf="currentWeather.weatherStatus === WeatherStatus.Snow" mat-card-image
+      src="../../../../assets/images/day_snow.png" width="256" height="256" alt="No photo">
+    <img *ngIf="currentWeather.weatherStatus === WeatherStatus.Rain || currentWeather.weatherStatus === WeatherStatus.Drizzle" mat-card-image
+      src="../../../../assets/images/day_rainy.png" width="256" height="256" alt="No photo">
+    <img *ngIf="currentWeather.weatherStatus === WeatherStatus.Clouds" mat-card-image
+      src="../../../../assets/images/day_cloudy.png" width="256" height="256" alt="No photo">
+      <img *ngIf="currentWeather.weatherStatus === WeatherStatus.Mist" mat-card-image
+      src="../../../../assets/images/mist.png" width="256" height="256" alt="No photo">
+    <mat-card-content>
+      <mat-card-title *ngIf="!isToggled">Temperature: {{ currentWeather.temperatureCDay}} °C</mat-card-title>
+      <mat-card-title *ngIf="isToggled">Temperature: {{currentWeather.temperatureFDay}} °F</mat-card-title>
+      <span>Change units: </span>
+      <mat-slide-toggle (change)="toggleDegreesFormat()">°C/°F</mat-slide-toggle>
+      <p>{{currentWeather.summary}} </p>
+    </mat-card-content>
+  </mat-card>
+</div>

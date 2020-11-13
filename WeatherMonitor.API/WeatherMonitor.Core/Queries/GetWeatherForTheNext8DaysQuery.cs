@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using WeatherMonitor.Core.DtoModels;
-using WeatherMonitor.Core.Entities;
+using WeatherMonitor.Core.Models;
 
 namespace WeatherMonitor.Core.Queries
 {
-    public class GetWeatherForecastQuery: IRequest<IEnumerable<WeatherForecastDto>>
+    public class GetWeatherForTheNext8DaysQuery: IRequest<IEnumerable<WeatherForecastDto>>
     {
         public Guid CityId { get; set; }
-        public DayCycle DayCycle { get; set; }
     }
 }
