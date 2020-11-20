@@ -11,7 +11,6 @@ using WeatherMonitor.Core.Commands;
 using WeatherMonitor.Core.DtoModels;
 using WeatherMonitor.Core.Models;
 using WeatherMonitor.Core.Entities;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 
 namespace WeatherMonitor.Core.CommandHandlers
